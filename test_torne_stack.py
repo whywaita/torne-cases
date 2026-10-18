@@ -28,10 +28,10 @@ def test_parts_fit_a1_mini(name):
     assert sz <= A1_MINI_BED
 
 
-def test_pocket_is_exactly_measured_torne_size():
-    # 実測 99 x 99 mm。すき間なしでぴったり
-    assert ts.POCKET_W == pytest.approx(99.0)
-    assert ts.POCKET_D == pytest.approx(99.0)
+def test_pocket_has_half_mm_clearance_per_side():
+    # 実測 99 x 99 mm + 片側 0.5mm
+    assert ts.POCKET_W == pytest.approx(100.0)
+    assert ts.POCKET_D == pytest.approx(100.0)
 
 
 def test_torne_footprint_does_not_overlap_guides():

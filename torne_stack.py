@@ -26,7 +26,7 @@ TORNE_D = 99.0
 TORNE_H = 24.0
 
 # --- 棚板 ---
-CLEARANCE = 0.0  # torne とガイドの片側すき間 (実測値ぴったり)
+CLEARANCE = 0.5  # torne とガイドの片側すき間 (印刷で内のりが縮む分)
 POCKET_W = TORNE_W + 2 * CLEARANCE
 POCKET_D = TORNE_D + 2 * CLEARANCE
 PLATE_T = 3.0
