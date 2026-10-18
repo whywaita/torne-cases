@@ -33,6 +33,12 @@ def test_pocket_holds_torne_with_clearance():
     assert ts.POCKET_D >= ts.TORNE_D + 1.0
 
 
+def test_pocket_fits_measured_torne_snugly():
+    # 実測 99 x 99 mm。片側 1.5mm を超えるとガタつく
+    assert 99.0 + 1.0 <= ts.POCKET_W <= 99.0 + 3.0
+    assert 99.0 + 1.0 <= ts.POCKET_D <= 99.0 + 3.0
+
+
 def test_gap_allows_lifting_torne_over_front_stop():
     # torne を前方ストッパーの上に持ち上げて抜き差しできること
     assert ts.GAP >= ts.TORNE_H + ts.FRONT_STOP_H + 1.0

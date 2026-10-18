@@ -19,9 +19,10 @@ from pathlib import Path
 import numpy as np
 from manifold3d import CrossSection, JoinType, Manifold, OpType
 
-# --- torne 本体 (取扱説明書: 幅100 x 高さ24 x 奥行き112 mm, 最大突起部含む) ---
-TORNE_W = 100.0
-TORNE_D = 112.0
+# --- torne 本体 (実測: 幅99 x 高さ24 x 奥行き99 mm) ---
+# 取扱説明書の 100 x 24 x 112 mm は突起部込み。背面中央は開けてあるので突起はそこに逃がす
+TORNE_W = 99.0
+TORNE_D = 99.0
 TORNE_H = 24.0
 
 # --- 棚板 ---

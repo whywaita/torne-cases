@@ -1,6 +1,6 @@
 # torne-cases
 
-Sony torne (CECH-ZD1J, 100 x 24 x 112 mm) を積み重ねて固定するラック。Raspberry Pi クラスタケース風。
+Sony torne (CECH-ZD1J, 実測 99 x 99 x 24 mm) を積み重ねて固定するラック。Raspberry Pi クラスタケース風。
 Bambu Lab A1 mini (180 x 180 x 180 mm) で印刷できるサイズにしている。
 
 ![preview](docs/preview.png)
@@ -9,11 +9,11 @@ Bambu Lab A1 mini (180 x 180 x 180 mm) で印刷できるサイズにしてい�
 
 | ファイル | 枚数 | 内容 |
 | --- | --- | --- |
-| `stl/tray.stl` | torne の台数 | 棚板 127 x 139 x 3 mm。左右ガイド、背面ストッパー (高さ 5 mm)、前面ストッパー (2 mm)、通気スリット付き |
+| `stl/tray.stl` | torne の台数 | 棚板 126 x 126 x 3 mm。左右ガイド、背面ストッパー (高さ 5 mm)、前面ストッパー (2 mm)、通気スリット付き |
 | `stl/lid.stl` | 1 | 最上段のフタ |
 | `stl/spacer.stl` | 4 x 台数 | 柱 (OD 7 / ID 3.4 / 長さ 30 mm)。既製スタンドオフを使う場合は不要 |
 
-固定穴は M3 用 φ3.4、ピッチ 115 x 127 mm。段ピッチは 33 mm (柱 30 + 板 3)。
+固定穴は M3 用 φ3.4、ピッチ 114 x 114 mm。段ピッチは 33 mm (柱 30 + 板 3)。
 背面中央は開けてあるので、アンテナ線と USB ケーブルはそこから出す。torne は少し持ち上げて前に引き出す。
 
 ## 固定方法
