@@ -28,15 +28,19 @@ def test_parts_fit_a1_mini(name):
     assert sz <= A1_MINI_BED
 
 
-def test_pocket_holds_torne_with_clearance():
-    assert ts.POCKET_W >= ts.TORNE_W + 1.0
-    assert ts.POCKET_D >= ts.TORNE_D + 1.0
+def test_pocket_is_exactly_measured_torne_size():
+    # 実測 99 x 99 mm。すき間なしでぴったり
+    assert ts.POCKET_W == pytest.approx(99.0)
+    assert ts.POCKET_D == pytest.approx(99.0)
 
 
-def test_pocket_fits_measured_torne_snugly():
-    # 実測 99 x 99 mm。片側 1.5mm を超えるとガタつく
-    assert 99.0 + 1.0 <= ts.POCKET_W <= 99.0 + 3.0
-    assert 99.0 + 1.0 <= ts.POCKET_D <= 99.0 + 3.0
+def test_torne_footprint_does_not_overlap_guides():
+    from manifold3d import Manifold
+
+    torne = Manifold.cube((ts.TORNE_W, ts.TORNE_D, ts.TORNE_H), True).translate(
+        (0, 0, ts.PLATE_T + ts.TORNE_H / 2)
+    )
+    assert (ts.guides() ^ torne).volume() == pytest.approx(0.0, abs=1e-6)
 
 
 def test_gap_allows_lifting_torne_over_front_stop():
