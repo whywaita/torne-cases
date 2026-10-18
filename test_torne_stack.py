@@ -44,13 +44,29 @@ def test_gap_allows_lifting_torne_over_front_stop():
     assert ts.GAP >= ts.TORNE_H + ts.FRONT_STOP_H + 1.0
 
 
-def test_standoffs_do_not_hit_rails():
-    rail_outer_x = ts.POCKET_W / 2 + ts.RAIL_T
-    rail_outer_y = ts.POCKET_D / 2 + ts.RAIL_T
+def _standoffs():
+    from manifold3d import Manifold, OpType
+
     r = ts.STANDOFF_CLEAR_R
-    assert ts.HOLE_X - r > rail_outer_x or ts.HOLE_Y - r > rail_outer_y
-    assert ts.HOLE_X - r > rail_outer_x
-    assert ts.HOLE_Y - r > rail_outer_y
+    cyl = Manifold.cylinder(ts.GAP, r, r, 48).translate((0, 0, ts.PLATE_T))
+    return Manifold.batch_boolean(
+        [cyl.translate((sx * ts.HOLE_X, sy * ts.HOLE_Y, 0)) for sx in (-1, 1) for sy in (-1, 1)],
+        OpType.Add,
+    )
+
+
+def test_standoffs_do_not_hit_guides():
+    assert (ts.guides() ^ _standoffs()).volume() == pytest.approx(0.0, abs=1e-6)
+
+
+def test_torne_slides_out_between_front_standoffs():
+    # 前面の柱の間を torne が通り抜けられること
+    assert ts.HOLE_X - ts.STANDOFF_CLEAR_R >= ts.POCKET_W / 2
+
+
+def test_tray_is_compact():
+    assert ts.PLATE_W <= 120.0
+    assert ts.PLATE_D <= 120.0
 
 
 def test_holes_keep_edge_margin():

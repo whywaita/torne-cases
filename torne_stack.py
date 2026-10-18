@@ -35,14 +35,15 @@ RAIL_H = 5.0  # 左右ガイドの高さ
 RETURN_L = 12.0  # 前後の角ストッパーの長さ
 BACK_STOP_H = RAIL_H  # 背面側ストッパー (奥に押し込みすぎ防止)
 FRONT_STOP_H = 2.0  # 前面側ストッパー (持ち上げて抜ける低さ)
-CORNER_R = 6.0
 
 # --- 柱 ---
+# 柱は torne の四隅のすぐ外に立てる。前面の柱の間を torne が通り抜けられる位置
 HOLE_D = 3.4  # M3 用通し穴
 STANDOFF_CLEAR_R = 3.5  # 柱 (印刷スペーサー OD7 / 六角スタンドオフ 5.5 対辺) が占める半径
-HOLE_X = POCKET_W / 2 + RAIL_T + STANDOFF_CLEAR_R + 0.6
-HOLE_Y = POCKET_D / 2 + RAIL_T + STANDOFF_CLEAR_R + 0.6
-EDGE = 6.0  # 穴中心から板の端まで
+HOLE_X = POCKET_W / 2 + STANDOFF_CLEAR_R + 0.5
+HOLE_Y = POCKET_D / 2 + STANDOFF_CLEAR_R + 0.5
+EDGE = 5.0  # 穴中心から板の端まで
+CORNER_R = EDGE  # 角の丸みを穴と同心にして縁の厚みをそろえる
 PLATE_W = 2 * (HOLE_X + EDGE)
 PLATE_D = 2 * (HOLE_Y + EDGE)
 
@@ -94,13 +95,16 @@ def _box(x0, x1, y0, y1, h):
     return Manifold.cube((x1 - x0, y1 - y0, h)).translate((x0, y0, PLATE_T))
 
 
+RAIL_Y = HOLE_Y - STANDOFF_CLEAR_R - 0.3
+
+
 def guides():
     hw, hd, t = POCKET_W / 2, POCKET_D / 2, RAIL_T
     parts = []
     for s in (-1, 1):
-        # 左右ガイド (全長)
+        # 左右ガイド (柱の手前まで)
         x0, x1 = (hw, hw + t) if s > 0 else (-hw - t, -hw)
-        parts.append(_box(x0, x1, -hd - t, hd + t, RAIL_H))
+        parts.append(_box(x0, x1, -RAIL_Y, RAIL_Y, RAIL_H))
         # 背面ストッパー (角のみ。中央はケーブル用に開ける)
         rx0, rx1 = (hw - RETURN_L, hw) if s > 0 else (-hw, -hw + RETURN_L)
         parts.append(_box(rx0, rx1, hd, hd + t, BACK_STOP_H))
