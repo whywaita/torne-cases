@@ -1,42 +1,46 @@
 # torne-cases
 
-Sony torne (CECH-ZD1J, 実測 99 x 99 x 24 mm) を積み重ねて固定するラック。Raspberry Pi クラスタケース風。
-Bambu Lab A1 mini (180 x 180 x 180 mm) で印刷できるサイズにしている。
+English | [日本語](README.ja.md)
+
+A stacking rack for Sony torne (CECH-ZD1J, measured 99 x 99 x 24 mm), styled after Raspberry Pi cluster cases.
+Every part fits on a Bambu Lab A1 mini (180 x 180 x 180 mm) build plate.
 
 ![preview](docs/preview.png)
 
-## 部品
+![Three torne units stacked in the rack](docs/photo.jpg)
 
-| ファイル | 枚数 | 内容 |
+## Parts
+
+| File | Quantity | Description |
 | --- | --- | --- |
-| `stl/tray.stl` | torne の台数 | 棚板 118 x 118 x 3 mm (ガイド内のり 100 x 100 mm、片側 0.5 mm のすき間)。左右ガイド、背面ストッパー (高さ 5 mm)、前面ストッパー (2 mm)、通気スリット付き |
-| `stl/lid.stl` | 1 | 最上段のフタ |
-| `stl/spacer.stl` | 4 x 台数 | 柱 (OD 7 / ID 3.4 / 長さ 30 mm)。既製スタンドオフを使う場合は不要 |
+| `stl/tray.stl` | One per torne | Shelf, 118 x 118 x 3 mm (100 x 100 mm inside the guides, 0.5 mm clearance per side). Side guides, rear stopper (5 mm tall), front stopper (2 mm), and ventilation slots |
+| `stl/lid.stl` | 1 | Top lid |
+| `stl/spacer.stl` | 4 x number of units | Pillar (OD 7 / ID 3.4 / length 30 mm). Not needed if you use off-the-shelf standoffs |
 
-固定穴は M3 用 φ3.4、ピッチ 108 x 108 mm (柱は torne の四隅のすぐ外)。段ピッチは 33 mm (柱 30 + 板 3)。
-背面中央は開けてあるので、アンテナ線と USB ケーブルはそこから出す。torne は少し持ち上げて前に引き出す。
+Mounting holes are φ3.4 for M3, on a 108 x 108 mm pitch (the pillars sit just outside the corners of the torne). Shelf pitch is 33 mm (30 mm pillar + 3 mm shelf).
+The center of the rear is open, so the antenna and USB cables exit there. To remove a torne, lift it slightly and slide it out the front.
 
-## 固定方法
+## Assembly
 
-- 既製品: M3 オス-メス スタンドオフ 30 mm を各段 4 本。最下段は M3 ネジで下から留める
-- 印刷: `spacer.stl` を挟み、M3 全ネジ (段数 x 33 + 10 mm 程度) かナットで締める
+- Off-the-shelf: four M3 male-female 30 mm standoffs per level. Fix the bottom shelf from below with M3 screws
+- Printed: sandwich `spacer.stl` between the shelves and tighten with M3 threaded rod (about levels x 33 + 10 mm) or nuts
 
-### 購入して試している部品
+### Parts I bought and am testing
 
-| 部品 | 用途 | リンク |
+| Part | Use | Link |
 | --- | --- | --- |
-| uxcell 六角スタンドオフ 真鍮 M3 x 30 mm + 6 mm オス-メス 10 本 | 棚板の間の柱 (1 段 4 本) | https://www.amazon.co.jp/dp/B078T9NN35 |
-| uxcell M3 x 5 mm 丸平頭 十字穴ねじ 304 ステンレス 20 本 | 最下段を下から留める | https://www.amazon.co.jp/dp/B0DZP3P75T |
+| uxcell brass hex standoff M3 x 30 mm + 6 mm male-female, 10 pcs | Pillars between shelves (4 per level) | https://www.amazon.co.jp/dp/B078T9NN35 |
+| uxcell M3 x 5 mm pan head Phillips screw, 304 stainless, 20 pcs | Fixing the bottom shelf from below | https://www.amazon.co.jp/dp/B0DZP3P75T |
 
-## 生成
+## Build
 
 ```sh
-uv run torne_stack.py          # stl/ に出力
+uv run torne_stack.py          # writes to stl/
 uv run --with pytest --with manifold3d --with numpy pytest
 ```
 
-寸法は `torne_stack.py` 冒頭の定数で変更できる。手持ちのスタンドオフ長に合わせる場合は `GAP` を変える (27 mm 以上)。
+Dimensions can be changed via the constants at the top of `torne_stack.py`. To match the length of the standoffs you have, change `GAP` (27 mm or more).
 
-## 推奨印刷設定
+## Recommended print settings
 
-PETG (torne は発熱するため PLA より無難)、0.2 mm レイヤー、壁 3 周、インフィル 20%、サポート不要。
+PETG (safer than PLA because torne gets warm), 0.2 mm layers, 3 walls, 20% infill, no supports.
