@@ -39,6 +39,7 @@ Pre-built STL files are in [`stl/`](stl/).
 | --- | --- | --- |
 | M3 x 30 mm male-female hex standoff (+6 mm thread) | 4 per torne | [uxcell, brass, 10 pcs](https://www.amazon.co.jp/dp/B078T9NN35) |
 | M3 x 5 mm pan head screw | 4 | [uxcell, 304 stainless, 20 pcs](https://www.amazon.co.jp/dp/B0DZP3P75T) |
+| M3 hex nut | 4 | Any |
 
 If you use printed spacers instead, you need an M3 threaded rod (about `levels x 33 + 10` mm) or bolts and nuts.
 
@@ -47,7 +48,7 @@ If you use printed spacers instead, you need an M3 threaded rod (about `levels x
 1. Fix four standoffs to the bottom tray from below with M3 screws.
 2. Place a torne on the tray, with its back facing the open side.
 3. Place the next tray over the standoff threads, then screw four more standoffs onto them to clamp it.
-4. Repeat for each torne, and finish with `lid.stl`.
+4. Repeat for each torne. Place `lid.stl` on top and fasten it with M3 nuts.
 
 Mounting holes are φ3.4 mm on a 108 x 108 mm pitch, just outside the corners of the torne. Each level adds 33 mm (30 mm standoff + 3 mm tray).
 
@@ -76,3 +77,11 @@ Edit the constants at the top of the script to change the dimensions. For exampl
 ```sh
 uv run --with pytest --with manifold3d --with numpy pytest
 ```
+
+## License
+
+[MIT](LICENSE)
+
+## Disclaimer
+
+This is an unofficial project and is not affiliated with, endorsed by, or sponsored by Sony Interactive Entertainment or Sony Group Corporation. "torne" is a trademark of its respective owner.
