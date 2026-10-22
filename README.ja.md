@@ -2,45 +2,77 @@
 
 [English](README.md) | 日本語
 
-Sony torne (CECH-ZD1J, 実測 99 x 99 x 24 mm) を積み重ねて固定するラック。Raspberry Pi クラスタケース風。
-Bambu Lab A1 mini (180 x 180 x 180 mm) で印刷できるサイズにしている。
+**Sony torne を積み重ねて収納する 3D プリント製ラック。Raspberry Pi クラスタケース風。**
 
-![preview](docs/preview.png)
+torne (CECH-ZD1J) を好きな台数だけ積み重ね、M3 スタンドオフで固定する。すべての部品は Bambu Lab A1 mini (180 x 180 x 180 mm) で印刷できる。
 
-![torne を 3 台積んだ様子](docs/photo.jpg)
+<p align="center">
+  <img src="docs/photo.jpg" alt="torne を 3 台積んだ様子" width="600">
+</p>
 
-## 部品
+![レンダリングしたプレビュー](docs/preview.png)
 
-| ファイル | 枚数 | 内容 |
+## 特徴
+
+- **積み重ね式**: torne 1 台につき棚板 1 枚。既製の M3 スタンドオフか印刷スペーサーでつなぐ
+- **ぴったり固定**: 実測 99 x 99 x 24 mm に合わせた左右ガイドと前後ストッパー。すき間は片側 0.5 mm
+- **出し入れが簡単**: torne を少し持ち上げれば、ラックを分解せずに前へ引き出せる
+- **配線しやすい**: 背面中央が開いており、アンテナ線と USB ケーブルを通せる
+- **通気**: すべての棚板とフタに通気スリット
+- **パラメトリック**: 寸法はすべて 1 本の Python スクリプトの定数で管理
+
+## 部品表
+
+### 印刷部品
+
+| ファイル | 数量 | 内容 |
 | --- | --- | --- |
-| `stl/tray.stl` | torne の台数 | 棚板 118 x 118 x 3 mm (ガイド内のり 100 x 100 mm、片側 0.5 mm のすき間)。左右ガイド、背面ストッパー (高さ 5 mm)、前面ストッパー (2 mm)、通気スリット付き |
+| `stl/tray.stl` | torne 1 台につき 1 | 118 x 118 x 3 mm の棚板。左右ガイド、背面ストッパー (5 mm)、前面ストッパー (2 mm)、通気スリット付き |
 | `stl/lid.stl` | 1 | 最上段のフタ |
-| `stl/spacer.stl` | 4 x 台数 | 柱 (OD 7 / ID 3.4 / 長さ 30 mm)。既製スタンドオフを使う場合は不要 |
+| `stl/spacer.stl` | torne 1 台につき 4 | 柱 (OD 7 / ID 3.4 / 長さ 30 mm)。スタンドオフを使う場合は不要 |
 
-固定穴は M3 用 φ3.4、ピッチ 108 x 108 mm (柱は torne の四隅のすぐ外)。段ピッチは 33 mm (柱 30 + 板 3)。
-背面中央は開けてあるので、アンテナ線と USB ケーブルはそこから出す。torne は少し持ち上げて前に引き出す。
+生成済みの STL は [`stl/`](stl/) にある。
 
-## 固定方法
+### 金物
 
-- 既製品: M3 オス-メス スタンドオフ 30 mm を各段 4 本。最下段は M3 ネジで下から留める
-- 印刷: `spacer.stl` を挟み、M3 全ネジ (段数 x 33 + 10 mm 程度) かナットで締める
-
-### 購入して試している部品
-
-| 部品 | 用途 | リンク |
+| 部品 | 数量 | 例 |
 | --- | --- | --- |
-| uxcell 六角スタンドオフ 真鍮 M3 x 30 mm + 6 mm オス-メス 10 本 | 棚板の間の柱 (1 段 4 本) | https://www.amazon.co.jp/dp/B078T9NN35 |
-| uxcell M3 x 5 mm 丸平頭 十字穴ねじ 304 ステンレス 20 本 | 最下段を下から留める | https://www.amazon.co.jp/dp/B0DZP3P75T |
+| M3 x 30 mm オス-メス 六角スタンドオフ (ネジ部 6 mm) | torne 1 台につき 4 | [uxcell 真鍮 10 本](https://www.amazon.co.jp/dp/B078T9NN35) |
+| M3 x 5 mm 丸平頭ねじ | 4 | [uxcell 304 ステンレス 20 本](https://www.amazon.co.jp/dp/B0DZP3P75T) |
 
-## 生成
+印刷スペーサーを使う場合は、M3 全ネジ (`段数 x 33 + 10` mm 程度) かボルトとナットが必要。
+
+## 組み立て
+
+1. 最下段の棚板に、下から M3 ネジでスタンドオフを 4 本留める。
+2. 背面を開口部側に向けて torne を載せる。
+3. 次の棚板をスタンドオフのオスネジに通し、その上から次のスタンドオフ 4 本をねじ込んで挟み込む。
+4. torne の台数だけ繰り返し、最後に `lid.stl` を載せる。
+
+固定穴は φ3.4 mm、ピッチ 108 x 108 mm で、torne の四隅のすぐ外にある。1 段あたりの高さは 33 mm (スタンドオフ 30 mm + 棚板 3 mm)。
+
+## 印刷設定
+
+| 項目 | 値 |
+| --- | --- |
+| 材料 | PETG (torne は発熱するため PLA より推奨) |
+| レイヤー高さ | 0.2 mm |
+| 壁 | 3 周 |
+| インフィル | 20% |
+| サポート | 不要 |
+
+## カスタマイズ
+
+STL は [`torne_stack.py`](torne_stack.py) が [manifold3d](https://github.com/elalish/manifold) で生成している。実行に必要なのは [uv](https://docs.astral.sh/uv/) だけ。
 
 ```sh
-uv run torne_stack.py          # stl/ に出力
-uv run --with pytest --with manifold3d --with numpy pytest
+uv run torne_stack.py   # stl/ に STL を出力
 ```
 
-寸法は `torne_stack.py` 冒頭の定数で変更できる。手持ちのスタンドオフ長に合わせる場合は `GAP` を変える (27 mm 以上)。
+寸法はスクリプト冒頭の定数で変更できる。たとえば手持ちのスタンドオフに合わせて `GAP` を変える (27 mm 以上)。
 
-## 推奨印刷設定
+## 開発
 
-PETG (torne は発熱するため PLA より無難)、0.2 mm レイヤー、壁 3 周、インフィル 20%、サポート不要。
+```sh
+uv run --with pytest --with manifold3d --with numpy pytest
+```
